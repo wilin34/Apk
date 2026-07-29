@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WijiEdu · Entrega de actividades</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0f2f31">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#efeae0;
+    --card:#fffdf8;
+    --ink:#1c2023;
+    --ink-soft:#565a5f;
+    --teal:#1b4b4f;
+    --teal-deep:#0f2f31;
+    --amber:#e8a33d;
+    --amber-deep:#c9832a;
+    --motiv:#f4d58d;
+    --whatsapp:#25d366;
+    --whatsapp-deep:#1da851;
+    --line:#d8d0bd;
+  }
+
+  *{box-sizing:border-box;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(35,38,43,0.06) 1px, transparent 0) 0 0/16px 16px,
+      var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 80px;
+  }
+
+  .wrap{ width:100%; max-width:680px; }
+
+  .ticket{
+    animation:riseIn .5s ease-out both;
+    box-shadow:0 18px 40px -18px rgba(15,47,49,0.35);
+    border-radius:14px;
+    overflow:hidden;
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(12px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- HEADER ---------- */
+  .head{
+    background:
+      radial-gradient(circle at 100% 0%, rgba(232,163,61,0.16), transparent 55%),
+      linear-gradient(155deg, var(--teal-deep), var(--teal) 120%);
+    color:#f4efe4;
+    padding:26px 110px 46px 26px;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+  }
+
+  #motiv{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-style:italic;
+    font-weight:600;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--motiv);
+    text-align:right;
+    max-width:100%;
+  }
+
+  .brand{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:clamp(30px,7vw,42px);
+    letter-spacing:.01em;
+    line-height:1.03;
+    margin:0;
+  }
+
+  .brand span{color:var(--amber);}
+
+  .subtitle{
+    font-size:14px;
+    color:#cfd8d6;
+    margin:8px 0 0;
+    max-width:44ch;
+    line-height:1.5;
+  }
+
+  .stamp{
+    position:absolute;
+    right:22px;
+    top:20px;
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    border:2px solid var(--amber);
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    line-height:1.25;
+    letter-spacing:.04em;
+    transform:rotate(9deg);
+    text-transform:uppercase;
+    font-weight:600;
+    background:rgba(15,47,49,0.4);
+  }
+
+  /* ---------- STEPS STRIP (overlaps head/body like a ticket stub) ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    margin:0 20px;
+    transform:translateY(-24px);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 8px 20px -12px rgba(15,47,49,0.45);
+  }
+
+  .step{
+    background:var(--card);
+    padding:14px 12px 15px;
+    text-align:center;
+  }
+
+  .step .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    font-weight:600;
+    color:var(--amber-deep);
+    letter-spacing:.08em;
+  }
+
+  .step p{
+    margin:4px 0 0;
+    font-size:12px;
+    font-weight:500;
+    color:var(--ink);
+    line-height:1.3;
+  }
+
+  /* ---------- BODY ---------- */
+  .body-card{
+    background:var(--card);
+    padding:0 26px 26px;
+    margin-top:-24px;
+  }
+
+  .instructions{
+    display:flex;
+    gap:12px;
+    padding:14px 16px;
+    background:#f6f2e7;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    margin-bottom:20px;
+  }
+
+  .instructions .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--teal);
+    font-weight:600;
+    font-size:13px;
+    flex-shrink:0;
+  }
+
+  .instructions p{
+    margin:0;
+    font-size:13px;
+    line-height:1.55;
+    color:var(--ink-soft);
+  }
+
+  .instructions strong{color:var(--ink);}
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+  }
+
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- FORM ---------- */
+  .form-frame{
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:#fff;
+    overflow:hidden;
+  }
+
+  iframe{
+    display:block;
+    width:100%;
+    height:1150px;
+    border:none;
+  }
+
+  /* ---------- CONTACT / WHATSAPP ---------- */
+  .contact{
+    margin-top:24px;
+    background:var(--teal-deep);
+    border-radius:10px;
+    padding:18px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    color:#f4efe4;
+  }
+
+  .contact-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .contact-icon{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(232,163,61,0.16);
+    border:1.5px solid var(--amber);
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:15px;
+    flex-shrink:0;
+  }
+
+  .contact-text p{
+    margin:0;
+    font-size:13px;
+    line-height:1.4;
+  }
+
+  .contact-text .title{
+    font-weight:600;
+    font-size:13.5px;
+    margin-bottom:2px;
+  }
+
+  .contact-text .phone{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    letter-spacing:.03em;
+  }
+
+  .wa-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:var(--whatsapp);
+    color:#0b3b1e;
+    font-weight:600;
+    font-size:14.5px;
+    text-decoration:none;
+    padding:13px 18px;
+    border-radius:8px;
+    transition:background .15s ease, transform .1s ease;
+  }
+
+  .wa-btn:hover{ background:var(--whatsapp-deep); }
+  .wa-btn:active{ transform:scale(0.98); }
+
+  .wa-btn svg{ width:19px; height:19px; flex-shrink:0; }
+
+  /* ---------- FOOT ---------- */
+  .foot{
+    background:var(--teal-deep);
+    color:#9fb0ae;
+    text-align:center;
+    font-size:11.5px;
+    padding:14px 20px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.03em;
+  }
+
+  .foot b{color:#f4efe4;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  @media (max-width:480px){
+    .body-card{padding:0 16px 20px;}
+    .steps{margin:0 12px;}
+    .instructions{flex-direction:column; gap:4px;}
+    .head{padding-right:88px;}
+    .stamp{width:62px; height:62px; font-size:8.5px; right:16px; top:18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="ticket">
+
+  <div class="head">
+    <div class="eyebrow">
+      <span>WijiEdu</span>
+      <span id="motiv"></span>
+    </div>
+    <h1 class="brand">Entrega de <span>actividades</span></h1>
+    <p class="subtitle">Sube tu trabajo para que quede registrado y tu docente pueda revisarlo.</p>
+    <div class="stamp">Recibido<br>WijiEdu</div>
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="n">01</div><p>Tus datos</p></div>
+    <div class="step"><div class="n">02</div><p>Adjunta archivo</p></div>
+    <div class="step"><div class="n">03</div><p>Envía</p></div>
+  </div>
+
+  <div class="body-card">
+
+    <div class="instructions">
+      <span class="num">i</span>
+      <p>Completa <strong>nombre, materia y título de la actividad</strong>, adjunta tu archivo y agrega cualquier observación para tu docente. Al enviar, tu entrega queda guardada automáticamente.</p>
+    </div>
+
+    <div class="section-label">Formulario de entrega</div>
+
+    <div class="form-frame">
+      <div data-fillout-id="b7udgMsVJnus" data-fillout-embed-type="standard" style="width:100%;height:900px;" data-fillout-inherit-parameters data-fillout-dynamic-resize></div>
+      <script src="https://server.fillout.com/embed/v1/"></script>
+    </div>
+
+    <div class="contact">
+      <div class="contact-top">
+        <div class="contact-icon">?</div>
+        <div class="contact-text">
+          <p class="title">¿Tienes dudas?</p>
+          <p>Comunícate con tu docente · <span class="phone">311 818 4977</span></p>
+        </div>
+      </div>
+      <a class="wa-btn" href="https://wa.me/573118184977?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20entrega%20de%20mi%20actividad%20en%20WijiEdu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.8a8.06 8.06 0 0 1 5.73 2.37 8.07 8.07 0 0 1 2.37 5.73c0 4.47-3.63 8.1-8.1 8.1a8.1 8.1 0 0 1-4.14-1.14l-.3-.17-3.14.82.84-3.06-.19-.32a8.08 8.08 0 0 1-1.24-4.33c0-4.47 3.64-8.1 8.11-8.1M8.5 6.9c-.17 0-.44.06-.67.32-.23.25-.87.85-.87 2.08 0 1.22.89 2.4 1.01 2.57.13.16 1.75 2.8 4.32 3.82 2.13.85 2.57.68 3.03.64.46-.04 1.5-.61 1.71-1.2.21-.59.21-1.1.15-1.2-.06-.11-.23-.17-.48-.3-.25-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.12-.17.25-.65.82-.8.99-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.39-.79-1.9-.2-.5-.41-.43-.57-.44-.15-.01-.32-.01-.49-.01"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <b>WijiEdu</b> — plataforma educativa de WijiTech
+  </div>
+
+</div>
+</div>
+
+<script>
+  const frases = [
+    "Cada entrega es un paso más.",
+    "Lo simple bien hecho también es excelencia.",
+    "Tu esfuerzo de hoy es tu avance de mañana.",
+    "Aprender es construir, un archivo a la vez.",
+    "Constancia primero, perfección después.",
+    "Un trabajo entregado es un compromiso cumplido.",
+    "Hoy suma, aunque no lo sientas.",
+    "El progreso no siempre se ve, pero se acumula.",
+    "Terminar es una forma de ganar.",
+    "Tu futuro se construye con estas entregas."
+  ];
+  document.getElementById('motiv').textContent =
+    frases[Math.floor(Math.random() * frases.length)];
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+</script>
+
+</body>
+</html>
