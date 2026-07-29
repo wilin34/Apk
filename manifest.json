@@ -2,7 +2,7 @@
   "name": "WijiEdu - Entrega de actividades",
   "short_name": "WijiEdu",
   "description": "Sube y entrega tus actividades de WijiEdu desde el celular.",
-  "start_url": "./entrega-actividades-wijiedu.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
